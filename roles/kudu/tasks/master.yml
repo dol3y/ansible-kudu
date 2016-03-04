@@ -1,0 +1,6 @@
+---
+- name: install kudu-master
+  yum: name=kudu-master state=present
+
+- name: enable kudu-master service
+  service: name=kudu-master state=started enabled=yes

@@ -1,0 +1,4 @@
+---
+kudu_write_ahead_log: /var/lib/kudu/tserver
+kudu_data_dir: /var/lib/kudu/tserver
+kudu_user: kudu

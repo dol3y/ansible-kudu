@@ -1,0 +1,13 @@
+- hosts: kudu-master
+  become: true
+  roles:
+    - kudu
+  tags:
+    - kudu-master
+
+- hosts: kudu-tserver
+  become: true
+  roles:
+    - kudu
+  tags:
+    - kudu-tserver

@@ -1,0 +1,22 @@
+---
+- name: install kudu-tserver
+  yum: name=kudu-tserver state=present
+
+- name: create dirs
+  file:
+    group: "{{ kudu_user }}"
+    owner: "{{ kudu_user }}"
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ kudu_write_ahead_log }}"
+    - "{{ kudu_data_dir }}"
+
+- name: configure kudu-tserver
+  template:
+    src: tserver.gflagfile.j2
+    dest: /etc/kudu/conf.dist/tserver.gflagfile
+  notify: restart kudu-tserver
+
+- name: enable kudu-tserver service
+  service: name=kudu-tserver state=started enabled=yes

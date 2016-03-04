@@ -1,0 +1,28 @@
+---
+- name: yum update
+  yum: name=* state=latest
+
+- name: install libselinux-python
+  yum: name=libselinux-python state=present
+
+- name: add cloudera kudu repo
+  copy:
+    dest: /etc/yum.repos.d/cloudera-kudu.repo
+    src: cloudera-kudu.repo
+
+- name: install kudu base
+  yum: name={{ item }} state=present
+  with_items:
+    - ntp
+    - kudu
+    - kudu-client0
+    - kudu-client-devel
+
+- name: enable ntpd service
+  service: name=ntpd state=started enabled=yes
+
+- include: master.yml
+  when: inventory_hostname in groups['kudu-master']
+
+- include: tserver.yml
+  when: inventory_hostname in groups['kudu-tserver']

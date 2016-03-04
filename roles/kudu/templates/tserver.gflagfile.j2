@@ -1,0 +1,9 @@
+# Do not modify these two lines. If you wish to change these variables,
+# modify them in /etc/default/kudu-tserver.
+--fromenv=rpc_bind_addresses
+--fromenv=log_dir
+
+--fs_wal_dir={{ kudu_write_ahead_log }}
+--fs_data_dirs={{ kudu_data_dir }}
+
+--tserver_master_addrs={{ groups['kudu-master']|join(":5051,") }}
