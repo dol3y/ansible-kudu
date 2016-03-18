@@ -9,8 +9,8 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ kudu_write_ahead_log }}"
-    - "{{ kudu_data_dir }}"
+    - "{{ kudu_slave_write_ahead_log }}"
+    - "{{ kudu_slave_data_dir }}"
 
 - name: configure kudu-tserver
   template:

@@ -1,4 +1,7 @@
 ---
-kudu_write_ahead_log: /var/lib/kudu/tserver
-kudu_data_dir: /var/lib/kudu/tserver
+kudu_master_data_dir: /var/lib/kudu/master
+kudu_master_write_ahead_log: /var/lib/kudu/master
+kudu_slave_data_dir: /var/lib/kudu/tserver
+kudu_slave_write_ahead_log: /var/lib/kudu/tserver
 kudu_user: kudu
+kudu_rpc_max_message_size: 8388608

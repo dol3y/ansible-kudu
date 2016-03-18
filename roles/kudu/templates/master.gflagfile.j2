@@ -1,0 +1,9 @@
+# Do not modify these two lines. If you wish to change these variables,
+# modify them in /etc/default/kudu-master.
+--fromenv=rpc_bind_addresses
+--fromenv=log_dir
+
+--fs_wal_dir={{ kudu_master_write_ahead_log }}
+--fs_data_dirs={{ kudu_master_data_dir }}
+
+--rpc_max_message_size={{ kudu_rpc_max_message_size }}

@@ -1,3 +1,6 @@
 ---
 - name: restart kudu-tserver
   service: name=kudu-tserver state=restarted
+
+- name: restart kudu-master
+  service: name=kudu-master state=restarted

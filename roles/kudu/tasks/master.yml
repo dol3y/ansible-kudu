@@ -2,5 +2,21 @@
 - name: install kudu-master
   yum: name=kudu-master state=present
 
+- name: create dirs
+  file:
+    group: "{{ kudu_user }}"
+    owner: "{{ kudu_user }}"
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ kudu_master_write_ahead_log }}"
+    - "{{ kudu_master_data_dir }}"
+
+- name: configure kudu-master
+  template:
+    src: master.gflagfile.j2
+    dest: /etc/kudu/conf.dist/master.gflagfile
+  notify: restart kudu-master
+
 - name: enable kudu-master service
   service: name=kudu-master state=started enabled=yes

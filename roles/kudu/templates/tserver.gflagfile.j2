@@ -3,7 +3,9 @@
 --fromenv=rpc_bind_addresses
 --fromenv=log_dir
 
---fs_wal_dir={{ kudu_write_ahead_log }}
---fs_data_dirs={{ kudu_data_dir }}
+--fs_wal_dir={{ kudu_slave_write_ahead_log }}
+--fs_data_dirs={{ kudu_slave_data_dir }}
 
 --tserver_master_addrs={{ groups['kudu-master']|join(":5051,") }}
+
+--rpc_max_message_size={{ kudu_rpc_max_message_size }}

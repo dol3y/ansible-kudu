@@ -1,4 +1,7 @@
 ---
+- fail: msg="This role requires CentOS 6"
+  when: ansible_os_family != "RedHat" or ansible_lsb.major_release|int != 6
+
 - name: yum update
   yum: name=* state=latest
 
