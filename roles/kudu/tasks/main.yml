@@ -1,9 +1,6 @@
 ---
-- fail: msg="This role requires CentOS 6"
-  when: ansible_os_family != "RedHat" or ansible_lsb.major_release|int != 6
-
-- name: yum update
-  yum: name=* state=latest
+- fail: msg="Kudu hosts must be CentOS 6"
+  when: ansible_os_family != "RedHat" or ansible_distribution_major_version|int != 6
 
 - name: install libselinux-python
   yum: name=libselinux-python state=present
@@ -20,6 +17,14 @@
     - kudu
     - kudu-client0
     - kudu-client-devel
+
+- name: stop ntpd service
+  service: name=ntpd state=stopped
+
+- name: sync date
+  shell: "ntpdate `grep ^server /etc/ntp.conf | head -n1 | awk '{print $2}'`"
+  args:
+    executable: /bin/bash
 
 - name: enable ntpd service
   service: name=ntpd state=started enabled=yes

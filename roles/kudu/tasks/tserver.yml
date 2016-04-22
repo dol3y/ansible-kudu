@@ -12,6 +12,12 @@
     - "{{ kudu_slave_write_ahead_log }}"
     - "{{ kudu_slave_data_dir }}"
 
+- name: configure defaults
+  template:
+    src: defaults.kudu-tserver.j2
+    dest: /etc/default/kudu-tserver
+  notify: restart kudu-tserver
+
 - name: configure kudu-tserver
   template:
     src: tserver.gflagfile.j2

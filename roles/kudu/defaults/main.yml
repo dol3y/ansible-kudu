@@ -1,7 +1,16 @@
 ---
-kudu_master_data_dir: /var/lib/kudu/master
-kudu_master_write_ahead_log: /var/lib/kudu/master
-kudu_slave_data_dir: /var/lib/kudu/tserver
-kudu_slave_write_ahead_log: /var/lib/kudu/tserver
 kudu_user: kudu
+kudu_mount: /var/lib/kudu
+kudu_log_dir: /var/log/kudu
+kudu_bind_address: 0.0.0.0
+
+kudu_master_data_dir: "{{ kudu_mount }}/master"
+kudu_master_write_ahead_log: "{{ kudu_mount }}/master"
+kudu_master_port: 7051
+
+kudu_slave_data_dir: "{{ kudu_mount }}/tserver"
+kudu_slave_write_ahead_log: "{{ kudu_mount }}/tserver"
+kudu_slave_port: 7050
+
 kudu_rpc_max_message_size: 8388608
+kudu_rpc_service_queue_length: 50

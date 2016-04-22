@@ -12,6 +12,12 @@
     - "{{ kudu_master_write_ahead_log }}"
     - "{{ kudu_master_data_dir }}"
 
+- name: configure defaults
+  template:
+    src: defaults.kudu-master.j2
+    dest: /etc/default/kudu-master
+  notify: restart kudu-master
+
 - name: configure kudu-master
   template:
     src: master.gflagfile.j2

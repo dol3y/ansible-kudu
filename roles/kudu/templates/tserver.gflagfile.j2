@@ -6,6 +6,8 @@
 --fs_wal_dir={{ kudu_slave_write_ahead_log }}
 --fs_data_dirs={{ kudu_slave_data_dir }}
 
---tserver_master_addrs={{ groups['kudu-master']|join(":5051,") }}
+--tserver_master_addrs={% for server in groups['kudu-master'] %}{{ hostvars[server].ansible_eth0.ipv4.address }}:7051,{% endfor %}
 
 --rpc_max_message_size={{ kudu_rpc_max_message_size }}
+--rpc_service_queue_length={{ kudu_rpc_service_queue_length }}
+--webserver_interface={{ kudu_bind_address }}
